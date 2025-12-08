@@ -1,5 +1,5 @@
 # The template for this file is available on GitHub: https://github.com/Dynatrace/dynatrace-operator/blob/v1.4.0/assets/samples/dynakube/v1beta3/logMonitoring.yaml
-apiVersion: dynatrace.com/v1beta5
+apiVersion: dynatrace.com/v1beta3
 data:
   apiToken: ZHQwYzAxLjVBNTZBWkE3RFpKQTRZUVdPN0NKNFRSSy5KUEFIS0FKR0xVUVI2S0RDQkJUM0hYN09DVjZNQU1TVE1GNzc2QktSNjZUM0ZYRFBBS1RQUkhZUFY3UUVSNE9V
   dataIngestToken: ZHQwYzAxLk1NRlNXUUpJNUZQMktSWVFKV0paSFdYWi5HSDVBSkQ1WjZBMzNEQTczUEI2SVhSSE40R1lMSkJRWEg1VjZNWkNWVTJKSUs3N0I0R0Y0NFZGQktUVUVZMlIy
