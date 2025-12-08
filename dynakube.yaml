@@ -5,7 +5,7 @@ metadata:
   namespace: dynatrace
 type: Opaque
 data:
-  # Tokens from Source 2
+  # Same tokens as before
   apiToken: ZHQwYzAxLjVBNTZBWkE3RFpKQTRZUVdPN0NKNFRSSy5KUEFIS0FKR0xVUVI2S0RDQkJUM0hYN09DVjZNQU1TVE1GNzc2QktSNjZUM0ZYRFBBS1RQUkhZUFY3UUVSNE9V
   dataIngestToken: ZHQwYzAxLk1NRlNXUUpJNUZQMktSWVFKV0paSFdYWi5HSDVBSkQ1WjZBMzNEQTczUEI2SVhSSE40R1lMSkJRWEg1VjZNWkNWVTJKSUs3N0I0R0Y0NFZGQktUVUVZMlIy
 ---
@@ -16,17 +16,13 @@ metadata:
   namespace: dynatrace
   annotations:
     feature.dynatrace.com/k8s-app-enabled: "true"
-    feature.dynatrace.com/injection-readonly-volume: "true"
 spec:
-  # API URL from Source 2
+  # Your Government URL
   apiUrl: https://dynatrace.jdn.gov.my/e/ee8b6225-97b6-4cd7-bca2-bb7638ebf277/api
 
-  metadataEnrichment:
-    enabled: true
-
   oneAgent:
-    # Using Cloud Native Full Stack (Modern standard from Source 1)
-    classicFullstack:
+    # CHANGED: Switched to Classic Full Stack to avoid CSI Driver/Mount errors
+    classicFullStack:
       tolerations:
         - effect: NoSchedule
           key: node-role.kubernetes.io/master
@@ -34,6 +30,10 @@ spec:
         - effect: NoSchedule
           key: node-role.kubernetes.io/control-plane
           operator: Exists
+      # explicitly allowing the agent to run in privileged mode (required for Classic)
+      env:
+        - name: ONEAGENT_ENABLE_VOLUME_STORAGE
+          value: "false"
 
   activeGate:
     capabilities:
