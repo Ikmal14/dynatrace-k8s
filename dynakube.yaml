@@ -26,7 +26,7 @@ spec:
 
   oneAgent:
     # Using Cloud Native Full Stack (Modern standard from Source 1)
-    cloudNativeFullStack:
+    classicFullstack:
       tolerations:
         - effect: NoSchedule
           key: node-role.kubernetes.io/master
