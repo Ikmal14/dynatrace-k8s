@@ -1,5 +1,5 @@
 # CORRECTED FILE FOR LATEST OPERATOR
-apiVersion: dynatrace.com/v1beta2
+apiVersion: dynatrace.com/v1beta3
 kind: DynaKube
 metadata:
   name: cluster-mydigital
