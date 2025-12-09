@@ -11,7 +11,9 @@ spec:
   apiUrl: https://dynatrace.jdn.gov.my/e/ee8b6225-97b6-4cd7-bca2-bb7638ebf277/api
 
   oneAgent:
-    # CAPITALS MATTER HERE
+    # Optional: Set a host group for OneAgent
+    #
+    hostGroup: "kubernetes-mydid"
     classicFullStack:             # <--- FIXED (was classicFullstack)
       tolerations:
         - effect: NoSchedule
