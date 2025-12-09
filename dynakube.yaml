@@ -21,6 +21,8 @@ spec:
   # Internal Private IP via Public DNS
   apiUrl: https://dynatrace.jdn.gov.my/e/ee8b6225-97b6-4cd7-bca2-bb7638ebf277/api
 
+  skipCertCheck: true
+
   oneAgent:
     # Optional: Set a host group for OneAgent
     #
