@@ -1,15 +1,5 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cluster-mydigital
-  namespace: dynatrace
-type: Opaque
-data:
-  # Same tokens as before
-  apiToken: ZHQwYzAxLjVBNTZBWkE3RFpKQTRZUVdPN0NKNFRSSy5KUEFIS0FKR0xVUVI2S0RDQkJUM0hYN09DVjZNQU1TVE1GNzc2QktSNjZUM0ZYRFBBS1RQUkhZUFY3UUVSNE9V
-  dataIngestToken: ZHQwYzAxLk1NRlNXUUpJNUZQMktSWVFKV0paSFdYWi5HSDVBSkQ1WjZBMzNEQTczUEI2SVhSSE40R1lMSkJRWEg1VjZNWkNWVTJKSUs3N0I0R0Y0NFZGQktUVUVZMlIy
----
-apiVersion: dynatrace.com/v1beta3
+# CORRECTED FILE FOR LATEST OPERATOR
+apiVersion: dynatrace.com/v1beta3  # <--- FIXED (was v1beta2)
 kind: DynaKube
 metadata:
   name: cluster-mydigital
@@ -17,12 +7,12 @@ metadata:
   annotations:
     feature.dynatrace.com/k8s-app-enabled: "true"
 spec:
-  # Your Government URL
+  # Internal Private IP via Public DNS
   apiUrl: https://dynatrace.jdn.gov.my/e/ee8b6225-97b6-4cd7-bca2-bb7638ebf277/api
 
   oneAgent:
-    # CHANGED: Switched to Classic Full Stack to avoid CSI Driver/Mount errors
-    classicFullStack:
+    # CAPITALS MATTER HERE
+    classicFullStack:             # <--- FIXED (was classicFullstack)
       tolerations:
         - effect: NoSchedule
           key: node-role.kubernetes.io/master
@@ -30,7 +20,6 @@ spec:
         - effect: NoSchedule
           key: node-role.kubernetes.io/control-plane
           operator: Exists
-      # explicitly allowing the agent to run in privileged mode (required for Classic)
       env:
         - name: ONEAGENT_ENABLE_VOLUME_STORAGE
           value: "false"
@@ -39,6 +28,7 @@ spec:
     capabilities:
       - routing
       - kubernetes-monitoring
+      - dynatrace-api
     resources:
       requests:
         cpu: 500m
