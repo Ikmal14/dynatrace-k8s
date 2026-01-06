@@ -1,15 +1,14 @@
-# The template for this file is available on GitHub: https://github.com/Dynatrace/dynatrace-operator/blob/v1.4.0/assets/samples/dynakube/v1beta3/logMonitoring.yaml
 apiVersion: v1
-data:
-  apiToken: dt0c01.CETPZO3BRFFNG5HSQ2NLXR6L.CQMV4EABNCHBUJILI2ZPOOIGZJKHDWXIHCT7DA37ZIQEXYLUF2BF4UDDB26SWL6N
-  dataIngestToken: dt0c01.CETPZO3BRFFNG5HSQ2NLXR6L.CQMV4EABNCHBUJILI2ZPOOIGZJKHDWXIHCT7DA37ZIQEXYLUF2BF4UDDB26SWL6N
 kind: Secret
 metadata:
   name: cluster-mydigital
   namespace: dynatrace
 type: Opaque
+stringData:
+  # Changed to stringData so you can use plain text tokens directly
+  apiToken: dt0c01.CETPZO3BRFFNG5HSQ2NLXR6L.CQMV4EABNCHBUJILI2ZPOOIGZJKHDWXIHCT7DA37ZIQEXYLUF2BF4UDDB26SWL6N
+  dataIngestToken: dt0c01.CETPZO3BRFFNG5HSQ2NLXR6L.CQMV4EABNCHBUJILI2ZPOOIGZJKHDWXIHCT7DA37ZIQEXYLUF2BF4UDDB26SWL6N
 ---
-# CORRECTED FILE FOR LATEST OPERATOR
 apiVersion: dynatrace.com/v1beta3
 kind: DynaKube
 metadata:
@@ -24,10 +23,8 @@ spec:
   skipCertCheck: true
 
   oneAgent:
-    # Optional: Set a host group for OneAgent
-    #
     hostGroup: "kubernetes-mydid"
-    classicFullStack:             # <--- FIXED (was classicFullstack)
+    classicFullStack:
       tolerations:
         - effect: NoSchedule
           key: node-role.kubernetes.io/master
@@ -51,3 +48,7 @@ spec:
       limits:
         cpu: 1000m
         memory: 1.5Gi
+    env:
+      # Added per your request to force environment connection
+      - name: DT_SERVER
+        value: https://dynatrace.jdn.gov.my
