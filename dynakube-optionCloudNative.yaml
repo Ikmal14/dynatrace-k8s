@@ -51,4 +51,4 @@ spec:
         memory: 1.5Gi
     env:
       - name: DT_SERVER
-        value: https://dynatrace.jdn.gov.my
+        value: https://dynatrace.jdn.gov.my/communication
